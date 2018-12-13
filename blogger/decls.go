@@ -3,9 +3,9 @@ package blogger
 import "fmt"
 
 const (
-	epBlogGet       = ""
-	epPostsList     = "/posts"
-	epPostsSearch   = "/posts/search"
+	epBlogGet        = ""
+	epPostsList      = "/posts"
+	epPostsSearch    = "/posts/search"
 	epPostsGetByPath = "/posts/bypath"
 )
 

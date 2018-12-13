@@ -5,37 +5,64 @@ import (
 	"time"
 )
 
+// move the interface to cassiopeia.go
+
+// Need comment documentation here
 type Blogger interface {
+	// Need comment documentation here
 	ListPosts(context.Context, string) (PostList, error)
+	// Need comment documentation here
 	ListPostsByLabel(context.Context, string, string) (PostList, error)
+	// Need comment documentation here
 	GetPostByPath(context.Context, string) (Post, error)
 }
 
+// Need comment documentation here
 type PostList struct {
-	Kind          string `json:"kind"`
+	// Need comment documentation here
+	Kind string `json:"kind"`
+	// Need comment documentation here
 	NextPageToken string `json:"nextPageToken"`
-	Items         []Post `json:"items"`
+	// Need comment documentation here
+	Items []Post `json:"items"`
 }
 
+// Need comment documentation here
 type Post struct {
-	ID        string    `json:"id"`
+	// Need comment documentation here
+	ID string `json:"id"`
+	// Need comment documentation here
 	Published time.Time `json:"published"`
-	Updated   time.Time `json:"updated"`
-	URL       string    `json:"url,omitempty"`
-	Path      string    `json:"path,omitempty"`
-	Title     string    `json:"title"`
-	Content   string    `json:"content,omitempty"`
-	Summary   string    `json:"summary,omitempty"`
-	Images    []Image   `json:"images"`
-	Author    Author    `json:"author"`
-	Labels    []string  `json:"labels"`
+	// Need comment documentation here
+	Updated time.Time `json:"updated"`
+	// Need comment documentation here
+	URL string `json:"url,omitempty"`
+	// Need comment documentation here
+	Path string `json:"path,omitempty"`
+	// Need comment documentation here
+	Title string `json:"title"`
+	// Need comment documentation here
+	Content string `json:"content,omitempty"`
+	// Need comment documentation here
+	Summary string `json:"summary,omitempty"`
+	// Need comment documentation here
+	Images []Image `json:"images"`
+	// Need comment documentation here
+	Author Author `json:"author"`
+	// Need comment documentation here
+	Labels []string `json:"labels"`
 }
 
+// Need comment documentation here
 type Author struct {
+	// Need comment documentation here
 	DisplayName string `json:"displayName"`
-	URL         string `json:"url"`
+	// Need comment documentation here
+	URL string `json:"url"`
 }
 
+// Need comment documentation here
 type Image struct {
+	// Need comment documentation here
 	URL string `json:"url"`
 }

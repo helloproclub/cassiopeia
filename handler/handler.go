@@ -1,3 +1,4 @@
+// Need comment documentation here
 package handler
 
 import (
@@ -8,16 +9,19 @@ import (
 	c "github.com/helloproclub/cassiopeia"
 )
 
+// Need comment documentation here
 type Handler struct {
 	cas *c.Cassiopeia
 }
 
+// Need comment documentation here
 func NewHandler(c *c.Cassiopeia) *Handler {
 	return &Handler{
 		cas: c,
 	}
 }
 
+// Need comment documentation here
 func (h *Handler) Ping(w http.ResponseWriter, r *http.Request) {
 	type HelloWorld struct {
 		Name    string `json:"name"`
@@ -37,6 +41,7 @@ func (h *Handler) Ping(w http.ResponseWriter, r *http.Request) {
 	writeResponse(w, r, response)
 }
 
+// Need comment documentation here
 func (h *Handler) ListPosts(w http.ResponseWriter, r *http.Request) {
 	var (
 		err       error
@@ -55,6 +60,7 @@ func (h *Handler) ListPosts(w http.ResponseWriter, r *http.Request) {
 	writeResponse(w, r, postList)
 }
 
+// Need comment documentation here
 func (h *Handler) GetPostByPath(w http.ResponseWriter, r *http.Request) {
 	var (
 		err  error

@@ -1,3 +1,4 @@
+// Need comment documentation here
 package hall_of_fame
 
 import (
@@ -38,21 +39,27 @@ func NewHallOfFame(opt Option) (*HallOfFame, error) {
 	return &HallOfFame{db: db}, nil
 }
 
+// Need comment documentation here
 func (h *HallOfFame) InsertAchievement(ctx context.Context, achievement c.Achievement) (c.Achievement, error) {
 	return c.Achievement{}, nil
 }
 
+// Need comment documentation here
 func (h *HallOfFame) ListAchievements(ctx context.Context, limit, offset int) ([]c.Achievement, error) {
 	return []c.Achievement{}, nil
 }
+
+// Need comment documentation here
 func (h *HallOfFame) InsertHero(ctx context.Context, hero c.Hero) (c.Hero, error) {
 	return c.Hero{}, nil
 }
 
+// Need comment documentation here
 func (h *HallOfFame) GetHeroByID(ctx context.Context, id uint) (c.Hero, error) {
 	return c.Hero{}, nil
 }
 
+// Need comment documentation here
 func (h *HallOfFame) GetHeroByUsername(ctx context.Context, username string) (c.Hero, error) {
 	return c.Hero{}, nil
 }
