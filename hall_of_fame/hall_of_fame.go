@@ -1,4 +1,4 @@
-package cassiopeia
+package hall_of_fame
 
 import (
 	"context"

@@ -1,4 +1,4 @@
-package cassiopeia
+package blogger
 
 import (
 	"context"
@@ -8,7 +8,7 @@ import (
 // move the interface to cassiopeia.go
 
 // Need comment documentation here
-type Blogger interface {
+type Blog interface {
 	// Need comment documentation here
 	ListPosts(context.Context, string) (PostList, error)
 	// Need comment documentation here
