@@ -13,7 +13,6 @@ import (
 	"strings"
 	"time"
 
-	c "github.com/helloproclub/cassiopeia"
 )
 
 func NewBlogger(opt Option) (*Blogger, error) {
@@ -52,7 +51,7 @@ func NewBlogger(opt Option) (*Blogger, error) {
 	return blogger, nil
 }
 
-func (b *Blogger) ListPosts(ctx context.Context, pageToken string) (c.PostList, error) {
+func (b *Blogger) ListPosts(ctx context.Context, pageToken string) (PostList, error) {
 	params := map[string]string{
 		"fields":     "kind,nextPageToken,items(id, published, updated, url, title, content, author/displayName, author/url)",
 		"orderBy":    "published",
@@ -63,15 +62,15 @@ func (b *Blogger) ListPosts(ctx context.Context, pageToken string) (c.PostList, 
 		params["pageToken"] = pageToken
 	}
 
-	var postList c.PostList
+	var postList PostList
 	if err := b.getResource(epPostsList, params, &postList); err != nil {
-		return c.PostList{}, err
+		return PostList{}, err
 	}
 
 	return postList, nil
 }
 
-func (b *Blogger) ListPostsByLabel(ctx context.Context, label, pageToken string) (c.PostList, error) {
+func (b *Blogger) ListPostsByLabel(ctx context.Context, label, pageToken string) (PostList, error) {
 	params := map[string]string{
 		"q":          fmt.Sprintf("label=\"%v\"", label),
 		"fields":     "kind,nextPageToken,items(id, published, updated, url, title, content, author/displayName, author/url)",
@@ -83,28 +82,28 @@ func (b *Blogger) ListPostsByLabel(ctx context.Context, label, pageToken string)
 		params["pageToken"] = pageToken
 	}
 
-	var postList c.PostList
+	var postList PostList
 	if err := b.getResource(epPostsSearch, params, &postList); err != nil {
-		return c.PostList{}, err
+		return PostList{}, err
 	}
 
 	return postList, nil
 }
 
-func (b *Blogger) GetPostByPath(ctx context.Context, postPath string) (c.Post, error) {
+func (b *Blogger) GetPostByPath(ctx context.Context, postPath string) (Post, error) {
 	params := map[string]string{
 		"path":       postPath,
 		"maxComents": "0",
 		"fields":     "id, published, updated, url, title, content, author/displayName, author/url",
 	}
 
-	var post c.Post
+	var post Post
 	if err := b.getResource(epPostsGetByPath, params, &post); err != nil {
-		return c.Post{}, err
+		return Post{}, err
 	}
 
 	if post.ID == "" {
-		return c.Post{}, errors.New("Not found")
+		return Post{}, errors.New("Not found")
 	}
 
 	post.URL = ""

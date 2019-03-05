@@ -1,38 +1,53 @@
+// Need comment documentation here
 package cassiopeia
 
 import (
 	"context"
 	"fmt"
 	"regexp"
+	"github.com/helloproclub/cassiopeia/blogger"
+	"github.com/helloproclub/cassiopeia/hall_of_fame"
 )
 
-type Cassiopeia struct {
-	blogger Blogger
-	hof     HallOfFame
+// I guest this is the main package of this service right?
+// so, every interface needed in this package should be declared here(e.g blogger and halloffame)
+// we also need to create interface that will be implemented by Cassiopeia
+
+// this package shuld be implemented by cassiopeia, the intereface name is my random thought so i dont realy like it.
+// every function on Cassiopeia shoud be listed here first
+type ProclubMemberHallofFame interface {
 }
 
-func NewCassiopeia(b Blogger, h HallOfFame) (*Cassiopeia, error) {
+// Need comment documentation here
+type Cassiopeia struct {
+	blogger blogger.Blogger
+	hof     hall_of_fame.HallOfFame
+}
+
+// Need comment documentation here
+func NewCassiopeia(b blogger.Blogger, h hall_of_fame.HallOfFame) (*Cassiopeia, error) {
 	return &Cassiopeia{
 		blogger: b,
 		hof:     h,
 	}, nil
 }
 
-func (c *Cassiopeia) ListPosts(ctx context.Context, label, pageToken string) (PostList, error) {
+// Need comment documentation here
+func (c *Cassiopeia) ListPosts(ctx context.Context, label, pageToken string) (blogger.PostList, error) {
 	var (
 		err      error
-		postList PostList
+		postList blogger.PostList
 	)
 
 	if label != "" {
 		// fetch posts with label
 		if postList, err = c.blogger.ListPostsByLabel(ctx, label, pageToken); err != nil {
-			return PostList{}, err
+			return blogger.PostList{}, err
 		}
 	} else {
 		// fetch posts without label
 		if postList, err = c.blogger.ListPosts(ctx, pageToken); err != nil {
-			return PostList{}, err
+			return blogger.PostList{}, err
 		}
 	}
 
@@ -46,14 +61,15 @@ func (c *Cassiopeia) ListPosts(ctx context.Context, label, pageToken string) (Po
 	return postList, nil
 }
 
-func (c *Cassiopeia) GetPostByPath(ctx context.Context, path string) (Post, error) {
+// Need comment documentation here
+func (c *Cassiopeia) GetPostByPath(ctx context.Context, path string) (blogger.Post, error) {
 	var (
 		err  error
-		post Post
+		post blogger.Post
 	)
 
 	if post, err = c.blogger.GetPostByPath(ctx, path); err != nil {
-		return Post{}, err
+		return blogger.Post{}, err
 	}
 
 	return post, nil

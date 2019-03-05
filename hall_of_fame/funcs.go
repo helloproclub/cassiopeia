@@ -1,3 +1,4 @@
+// Need comment documentation here
 package hall_of_fame
 
 import (
@@ -6,12 +7,11 @@ import (
 	"fmt"
 	"time"
 
-	c "github.com/helloproclub/cassiopeia"
 	"github.com/jinzhu/gorm"
 )
 
-// HallOfFame hold functionallity to hall of fame
-type HallOfFame struct {
+// HallOfFamer hold functionallity to hall of fame
+type HallOfFamer struct {
 	db *gorm.DB
 }
 
@@ -26,33 +26,39 @@ type Option struct {
 }
 
 // NewMySQL returns a pointer of MySQL instance and error.
-func NewHallOfFame(opt Option) (*HallOfFame, error) {
+func NewHallOfFamer(opt Option) (HallOfFame, error) {
 	db, err := gorm.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=%s&parseTime=True&loc=Local", opt.User, opt.Password, opt.Host, opt.Port, opt.Database, opt.Charset))
 	if err != nil {
-		return &HallOfFame{}, errors.New(fmt.Sprintf("error when connecting to DB: %v", err))
+		return &HallOfFamer{}, errors.New(fmt.Sprintf("error when connecting to DB: %v", err))
 	}
 
 	db.DB().SetConnMaxLifetime(time.Minute)
 	db.DB().SetMaxIdleConns(0)
 
-	return &HallOfFame{db: db}, nil
+	return &HallOfFamer{db: db}, nil
 }
 
-func (h *HallOfFame) InsertAchievement(ctx context.Context, achievement c.Achievement) (c.Achievement, error) {
-	return c.Achievement{}, nil
+// Need comment documentation here
+func (h *HallOfFamer) InsertAchievement(ctx context.Context, achievement Achievement) (Achievement, error) {
+	return Achievement{}, nil
 }
 
-func (h *HallOfFame) ListAchievements(ctx context.Context, limit, offset int) ([]c.Achievement, error) {
-	return []c.Achievement{}, nil
-}
-func (h *HallOfFame) InsertHero(ctx context.Context, hero c.Hero) (c.Hero, error) {
-	return c.Hero{}, nil
+// Need comment documentation here
+func (h *HallOfFamer) ListAchievements(ctx context.Context, limit, offset int) ([]Achievement, error) {
+	return []Achievement{}, nil
 }
 
-func (h *HallOfFame) GetHeroByID(ctx context.Context, id uint) (c.Hero, error) {
-	return c.Hero{}, nil
+// Need comment documentation here
+func (h *HallOfFamer) InsertHero(ctx context.Context, hero Hero) (Hero, error) {
+	return Hero{}, nil
 }
 
-func (h *HallOfFame) GetHeroByUsername(ctx context.Context, username string) (c.Hero, error) {
-	return c.Hero{}, nil
+// Need comment documentation here
+func (h *HallOfFamer) GetHeroByID(ctx context.Context, id uint) (Hero, error) {
+	return Hero{}, nil
+}
+
+// Need comment documentation here
+func (h *HallOfFamer) GetHeroByUsername(ctx context.Context, username string) (Hero, error) {
+	return Hero{}, nil
 }
